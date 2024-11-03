@@ -11,9 +11,9 @@ app.use(bodyParser.json());
 app.post('/vehicles', vehicleController.createVehicle);
 app.get('/vehicles', vehicleController.getVehicles);
 
-describe('Vehicle Controller', () => {
+describe('VehicleController', () => {
   describe('POST /vehicles', () => {
-    it('should return 400 if required fields are missing', async () => {
+    it('shouldReturn400IfRequiredFieldsAreMissing', async () => {
       const response = await request(app)
         .post('/vehicles')
         .send({ modelo: 'Digger Crawler', fabricante: 'Corellia Mining Corporation' });
@@ -26,7 +26,7 @@ describe('Vehicle Controller', () => {
       });
     });
 
-    it('should return 201 if vehicle is created successfully', async () => {
+    it('shouldReturn201IfVehicleIsCreatedSuccessfully', async () => {
       vehicleService.createVehicle.mockResolvedValue(1);
 
       const response = await request(app)
@@ -60,7 +60,7 @@ describe('Vehicle Controller', () => {
       });
     });
 
-    it('should return 500 if there is a server error', async () => {
+    it('shouldReturn500IfThereIsAServerError', async () => {
       vehicleService.createVehicle.mockRejectedValue(new Error('Server error'));
 
       const response = await request(app)
@@ -96,7 +96,7 @@ describe('Vehicle Controller', () => {
   });
 
   describe('GET /vehicles', () => {
-    it('should return 200 and the list of vehicles', async () => {
+    it('shouldReturn200AndTheListOfVehicles', async () => {
       const vehicles = [
         {
           id: 1,
@@ -130,7 +130,7 @@ describe('Vehicle Controller', () => {
       expect(response.body).toEqual(vehicles);
     });
 
-    it('should return 500 if there is a server error', async () => {
+    it('shouldReturn500IfThereIsAServerError', async () => {
       vehicleService.getVehicles.mockRejectedValue(new Error('Server error'));
 
       const response = await request(app).get('/vehicles');

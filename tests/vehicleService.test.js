@@ -3,9 +3,9 @@ const vehicleService = require('../src/services/vehicleService');
 
 jest.mock('../src/db/db');
 
-describe('Vehicle Service', () => {
+describe('VehicleService', () => {
   describe('createVehicle', () => {
-    it('should insert a vehicle and return the insertId', async () => {
+    it('shouldInsertAVehicleAndReturnTheInsertId', async () => {
       const vehicle = {
         nombre: 'Sand Crawler',
         modelo: 'Digger Crawler',
@@ -36,7 +36,7 @@ describe('Vehicle Service', () => {
       expect(db.query).toHaveBeenCalledWith(expect.any(String), expect.any(Array));
     });
 
-    it('should throw an error if the query fails', async () => {
+    it('shouldThrowAnErrorIfTheQueryFails', async () => {
       db.query.mockRejectedValue(new Error('Query failed'));
 
       await expect(vehicleService.createVehicle({})).rejects.toThrow('Query failed');
@@ -44,7 +44,7 @@ describe('Vehicle Service', () => {
   });
 
   describe('getVehicles', () => {
-    it('should return a list of vehicles', async () => {
+    it('shouldReturnAListOfVehicles', async () => {
       const vehicles = [
         {
           id: 1,
@@ -78,7 +78,7 @@ describe('Vehicle Service', () => {
       expect(db.query).toHaveBeenCalledWith('SELECT * FROM Vehicles');
     });
 
-    it('should throw an error if the query fails', async () => {
+    it('shouldThrowAnErrorIfTheQueryFails', async () => {
       db.query.mockRejectedValue(new Error('Query failed'));
 
       await expect(vehicleService.getVehicles()).rejects.toThrow('Query failed');
