@@ -1,0 +1,24 @@
+service: start-wars-api
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: us-east-1
+
+functions:
+  app:
+    handler: handler.handler
+    events:
+      - http:
+          path: vehicles
+          method: post
+      - http:
+          path: vehicles
+          method: get
+
+plugins:
+  - serverless-offline
+
+custom:
+  serverless-offline:
+    port: 3000
